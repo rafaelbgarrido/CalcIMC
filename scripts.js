@@ -1,4 +1,3 @@
-// 1 Caapturar o Submit do Form
 const form = document.querySelector('#formulario');
 
 form.addEventListener('submit', function (evento) {
