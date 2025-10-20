@@ -1,46 +1,72 @@
-/* Base (v1) resumido */
-:root{--bg:#ffffff; --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb; --brand:#ef4444; --brand-ink:#fff; --alt:#f8fafc; --container:1080px}
+/* === PALETA PIPOCA – Rafael (v2) === */
+:root{
+  /* Paleta enviada */
+  --color1: #f5454b; /* vermelho/rosa quente (primária) */
+  --color2: #fafafa; /* creme pipoca (fundo alternativo) */
+  --color3: #fafafa; /* amarelo manteiga (destaques) */
+  --color4: #f7e3d5; /* laranja claro (acento 1) */
+  --color5: #e9592d; /* laranja queimado (acento 2) */
+
+  /* Tokens de tema mapeados à paleta */
+  --bg: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+
+  --brand: var(--color1);       /* botões primários, CTAs */
+  --brand-ink: #ffffff;         /* texto sobre a cor primária */
+  --alt: var(--color2);         /* fundo alternativo das seções */
+
+  /* Derivados úteis com color-mix (suporte nos navegadores modernos) */
+  --brand-200: color-mix(in srgb, var(--brand) 20%, #fff);
+  --brand-300: color-mix(in srgb, var(--brand) 35%, #fff);
+  --brand-700: color-mix(in srgb, var(--brand) 75%, #000);
+
+  --accent-1: var(--color4);
+  --accent-2: var(--color5);
+  --highlight: var(--color3);   /* tags, badges, destaques */
+
+  --container: 1080px;
+}
+
+/* Utilitários rápidos de cor */
+.color1{ color: var(--color1); }
+.color2{ color: var(--color2); }
+.color3{ color: var(--color3); }
+.color4{ color: var(--color4); }
+.color5{ color: var(--color5); }
+
+.bg-color1{ background: var(--color1); color: var(--brand-ink); }
+.bg-color2{ background: var(--color2); }
+.bg-color3{ background: var(--color3); }
+.bg-color4{ background: var(--color4); color:#111; }
+.bg-color5{ background: var(--color5); color:#fff; }
+
+.bd-color1{ border-color: var(--color1) !important; }
+.bd-color2{ border-color: var(--color2) !important; }
+.bd-color3{ border-color: var(--color3) !important; }
+.bd-color4{ border-color: var(--color4) !important; }
+.bd-color5{ border-color: var(--color5) !important; }
+
+/* Base (v1) resumido – mantém estrutura original */
 *{box-sizing:border-box}
 body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;color:var(--ink);background:var(--bg);margin:0}
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 .flex{display:flex;gap:16px}.between{justify-content:space-between}.center{align-items:center}.wrap{flex-wrap:wrap}
 .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:32px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-
 /* MELHORIA 1: Responsividade mais refinada */
-@media (max-width: 900px) {
-  /* No 900px, o grid-2 colapsa para uma coluna */
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
 @media (max-width: 768px) {
-  /* Tenta 2 colunas para o grid-3 em tablets */
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px; /* Reduz o espaçamento em telas menores */
-  }
-  .cards .card, .contact-card {
-    padding: 14px;
-  }
-  .hero {
-    padding: 48px 0; /* Reduz o padding vertical do hero */
-  }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .cards .card, .contact-card { padding: 14px; }
+  .hero { padding: 48px 0; }
 }
 @media (max-width: 576px) {
-  /* Colapsa o grid-3 para uma coluna em celulares */
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-  .cta-group {
-    flex-direction: column; /* Botões de CTA na vertical em telas pequenas */
-  }
-  .btn {
-    width: 100%; /* Botões de CTA ocupam toda a largura */
-    text-align: center;
-  }
+  .grid-3 { grid-template-columns: 1fr; }
+  .cta-group { flex-direction: column; }
+  .btn { width: 100%; text-align: center; }
 }
-
 .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
 .logo{font-weight:700}
 .nav__toggle{display:none;background:none;border:none;font-size:22px}
@@ -52,33 +78,24 @@ body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;col
 .lead{color:var(--muted)}
 .cta-group{display:flex;gap:12px;margin:16px 0 8px}
 .btn{background:var(--brand);color:var(--brand-ink);padding:12px 18px;border-radius:10px;text-decoration:none;display:inline-block}
+.btn:hover{ background: var(--brand-700); }
+.btn:focus-visible{ outline: 3px solid var(--brand-300); outline-offset: 2px; }
 .btn--ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn--sm{padding:8px 12px;font-size:14px}
-.checks{list-style:"✓ ";padding-left:20px;color:var(--muted)}
+.checks{list-style:"\2713 ";padding-left:20px;color:var(--muted)}
 .wire-img svg{border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
 .trust{padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
 .pill{padding:6px 10px;border-radius:999px;background:#f3f4f6;color:#111827;border:1px solid var(--line)}
 .section{padding:56px 0}
 .section.alt{background:var(--alt)}
-
 /* MELHORIA 2: Centralização de títulos e blocos de conteúdo */
-.section h2 {
-  text-align: center; /* Centraliza todos os títulos de seção */
-  margin-bottom: 32px;
-}
-.section-center {
-  max-width: 768px; /* Limita a largura do bloco de texto para melhor leitura */
-  margin-left: auto;
-  margin-right: auto;
-}
+.section h2 { text-align: center; margin-bottom: 32px; }
+.section-center { max-width: 768px; margin-left: auto; margin-right: auto; }
 /* Garante que o container do section-center mantenha o padding lateral */
-.section-center.container {
-    padding: 0 20px;
-}
-
+.section-center.container { padding: 0 20px; }
 .cards .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
-.card.highlight{border-color:#fecaca}
-.tag{background:#fde68a;color:#92400e;font-size:12px;padding:2px 6px;border-radius:8px;margin-left:8px}
+.card.highlight{border-color:var(--brand-300)}
+.tag{background:var(--highlight);color:#7a3e16;font-size:12px;padding:2px 6px;border-radius:8px;margin-left:8px}
 .price{color:#111827}
 .list{list-style:none;margin:0;padding:0}
 .list li{padding:6px 0;border-bottom:1px dashed var(--line)}
@@ -102,8 +119,7 @@ body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;col
 .footer a{color:#d1d5db;text-decoration:none}
 .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
 .skip-link:focus{position:static;width:auto;height:auto;padding:8px;background:#000;color:#fff}
-
-/* === SCROLL UX PROFESSIONAL (Já estava OK) === */
+/* === SCROLL UX PROFESSIONAL === */
 :root{ --topbar-h: 64px; }
 html{ scroll-behavior:smooth; scroll-padding-top: var(--topbar-h); }
 .topbar{ height: var(--topbar-h); }
@@ -111,9 +127,9 @@ section[id]{ scroll-margin-top: calc(var(--topbar-h) + 12px); }
 *{ scrollbar-width: thin; scrollbar-color: #cbd5e1 #f8fafc; }
 ::-webkit-scrollbar{ width: 10px; }
 ::-webkit-scrollbar-track{ background:#f8fafc; }
-::-webkit-scrollbar-thumb{ background: linear-gradient(180deg,#ef4444,#f97316); border-radius: 8px; border:2px solid #f8fafc; }
+::-webkit-scrollbar-thumb{ background: linear-gradient(180deg, var(--color1), var(--color5)); border-radius: 8px; border:2px solid #f8fafc; }
 body.snap{ scroll-snap-type: y proximity; }
 body.snap .hero, body.snap .section{ scroll-snap-align: start; }
 .to-top{ position: fixed; right: 18px; bottom: 18px; width: 44px; height: 44px; border-radius: 999px; background:#111827; color:#fff; display:grid; place-items:center; box-shadow: 0 10px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transform: translateY(10px); transition: opacity .25s ease, transform .25s ease; z-index: 60; }
 .to-top.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
-.to-top:hover{ background:#ef4444; }
+.to-top:hover{ background: var(--brand); }
