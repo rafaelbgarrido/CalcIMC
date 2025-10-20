@@ -1,82 +1,20 @@
-const form = document.querySelector('#formulario');
+// Mobile nav toggle
+const toggle = document.querySelector('.nav__toggle');
+const menu = document.getElementById('menu');
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const inputPeso = e.target.querySelector('#peso');
-    const inputAltura = e.target.querySelector('#altura');
+// Year in footer
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    const peso = Number(inputPeso.value);
-    const altura = Number(inputAltura.value);
-
-    if (!peso) {
-        setResultado('Peso Inválido', false);
-        return;
-    }
-
-    if (!altura) {
-        setResultado('Altura Inválida', false);
-        return;
-    }
-
-    const imc = getImc(peso, altura);
-    const nivelImc = getNivelImc(imc);
-
-    const msg = `O seu IMC é ${imc} (${nivelImc}).`;
-
-    setResultado(msg, true);
-
+// Back-to-top visibility
+const toTop = document.querySelector('.to-top');
+window.addEventListener('scroll', ()=>{
+  if (!toTop) return;
+  const show = window.scrollY > 300;
+  toTop.classList.toggle('show', show);
 });
-function getNivelImc (imc) {
-    const nivel = ['Abaixo do Peso', 'Peso Normal', 'Sobrepeso', 'Obesidade Grau 1', 'Obesidade Grau 2', 'Obesidade Grau 3'];
-
-    if (imc >= 39.9) {
-        return nivel[5];
-    }
-    
-    if (imc >= 34.9) {
-        return nivel[4];
-    }
-    
-    if (imc >= 29.9) {
-        return nivel[3];        
-    }
-    
-    if (imc >= 24.9) {
-        return nivel[2];        
-    }
-    
-    if (imc >= 18.5) {
-        return nivel[1];        
-    }
-    
-    if (imc < 18.5) {
-        return nivel[0];        
-    }
-}
-
-function getImc (peso, altura){
-    const imc = peso / altura ** 2; 
-    return imc.toFixed (2);
-}
-
-function criaP(){
-    const p = document.createElement('p');
-    return p;
-}
-
-function setResultado (msg, isValid){
-    const resultado = document.querySelector('#resultado');
-    resultado.innerHTML = '';
-
-    const p = criaP();
-
-    if (isValid){
-        p.classList.add('paragrafo-resultado');
-    } else {
-        p.classList.add('bad');
-    }
-
-    p.innerHTML = msg;
-    resultado.appendChild(p);
-
-};
